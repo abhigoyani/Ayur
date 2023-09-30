@@ -1,0 +1,33 @@
+from db import db
+
+class Schedule(db.Model):
+    __tablename__ = 'schedules'
+
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    medicine_name = db.Column(db.String(50), nullable=False)
+    datetime = db.Column(db.DateTime, nullable=False)
+    description = db.Column(db.Text)
+    user = db.relationship('User', back_populates='schedules')
+
+    def __init__(self, user_id, medicine_name, datetime, description=None):
+        self.user_id = user_id
+        self.medicine_name = medicine_name
+        self.datetime = datetime
+        self.description = description
+
+    def save_to_db(self):
+        db.session.add(self)
+        db.session.commit()
+
+    def delete_from_db(self):
+        db.session.delete(self)
+        db.session.commit()
+
+    @classmethod
+    def find_by_id(cls, schedule_id):
+        return cls.query.filter_by(id=schedule_id).first()
+
+    @classmethod
+    def find_by_user_id(cls, user_id):
+        return cls.query.filter_by(user_id=user_id).all()
