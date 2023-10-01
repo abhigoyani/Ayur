@@ -11,9 +11,12 @@ from flask_jwt_extended import JWTManager
 from flask_jwt_extended import create_access_token
 import datetime
 from models.user import User
+from flask_cors import CORS
+
 
 def create_app(db_url=None):
     app = Flask(__name__)
+    CORS(app)
     load_dotenv()
     app.config["API_TITLE"] = "Stores REST API"
     app.config["API_VERSION"] = "v1"
