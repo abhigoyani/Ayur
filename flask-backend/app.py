@@ -5,6 +5,7 @@ from db import db
 from dotenv import load_dotenv
 from resources.users import users_bp
 from resources.schedule import schedules_bp
+from resources.symptoms import symptoms_bp
 import os
 from flask_jwt_extended import JWTManager
 from flask_jwt_extended import create_access_token
@@ -45,6 +46,7 @@ def create_app(db_url=None):
 
     api.register_blueprint(users_bp)
     api.register_blueprint(schedules_bp)
+    api.register_blueprint(symptoms_bp)
 
     return app
 

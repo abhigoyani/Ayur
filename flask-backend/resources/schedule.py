@@ -3,8 +3,6 @@ from flask.views import MethodView
 from models import Schedule,User
 from schemas import ScheduleSchema,UpdateLastTakenSchema
 from flask_jwt_extended import jwt_required, current_user
-from uuid import uuid4
-from  db import db
 
 
 schedules_bp = Blueprint('Schedules','schedule',description='Schedule related operations')
