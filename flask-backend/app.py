@@ -4,10 +4,12 @@ import urllib.parse
 from db import db
 from dotenv import load_dotenv
 from resources.users import users_bp
+from resources.schedule import schedules_bp
 import os
 from flask_jwt_extended import JWTManager
 from flask_jwt_extended import create_access_token
-
+import datetime
+from models.user import User
 
 def create_app(db_url=None):
     app = Flask(__name__)
@@ -26,11 +28,26 @@ def create_app(db_url=None):
     api = Api(app)
 
     app.config["JWT_SECRET_KEY"] = os.getenv('JWT_SECRET')
+    app.config['JWT_ACCESS_TOKEN_EXPIRES'] = datetime.timedelta(days=5)
     jwt = JWTManager(app)
+
+    @jwt.user_identity_loader
+    def user_identity_lookup(user):
+        return user    
+    @jwt.user_lookup_loader
+    def user_lookup_callback(_jwt_header, jwt_data):
+        identity = jwt_data["sub"]
+        return User.find_by_mobile_number(identity)
+
 
     with app.app_context():
         db.create_all()
 
     api.register_blueprint(users_bp)
+    api.register_blueprint(schedules_bp)
 
     return app
+
+if __name__ == "__main__":
+    app = create_app()
+    app.run(host='0.0.0.0',port=5000, debug=True)

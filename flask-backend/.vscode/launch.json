@@ -1,0 +1,19 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Flask: Run",
+            "type": "python",
+            "request": "launch",
+            "module": "flask",
+            "env": {
+                "FLASK_APP": "your_app_file.py"
+            },
+            "args": [
+                "run",
+                "--host=0.0.0.0"
+            ],
+            "jinja": true
+        }
+    ]
+}

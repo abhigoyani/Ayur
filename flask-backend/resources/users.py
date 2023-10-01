@@ -2,10 +2,11 @@ from flask_smorest import Blueprint,abort
 from flask.views import MethodView
 from models import User
 from schemas import SendOtpSchema,VerifyOtpSchema
-from db import db
 from util.auth import Verify
 from twilio.base.exceptions import TwilioRestException
 from flask_jwt_extended import create_access_token
+from flask_jwt_extended import jwt_required,current_user
+
 users_bp = Blueprint('Users','user',description='User related operations')
 
 verify = Verify()
@@ -51,6 +52,10 @@ class UserVerifyOtp(MethodView):
         except TwilioRestException as e:
                 print(e.__str__())
                 abort(403,message="error in otp verify"+e.__str__())
+
+
+
+
 
 # def register_user():
 #     user_schema = UserSchema()

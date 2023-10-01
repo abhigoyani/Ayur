@@ -14,8 +14,9 @@ class PlainScheduleSchema(Schema):
     datetime = fields.DateTime(required=True)
 
 class ScheduleSchema(PlainScheduleSchema):
-    user_id = fields.Integer(required=True,load_only=True)
+    user_id = fields.Integer(required=True,dump_only=True)
     user = fields.Nested(PlainUserSchema(), dump_only=True)
+    last_taken = fields.DateTime(required=False,default=None)
     
 class UserSchema(PlainUserSchema):
     schedules = fields.Nested(PlainScheduleSchema(), dump_only=True)
@@ -29,4 +30,8 @@ class  VerifyOtpSchema(Schema):
     otp = fields.String(required=True,load_only=True , error_messages={"required": "OTP is required."})  
     new_registered  = fields.Boolean(dump_only=True,default=False)
     token = fields.String(dump_only=True,default="success")
+
+class UpdateLastTakenSchema(Schema):
+    id = fields.Integer(required=True)
+    last_taken = fields.DateTime(required=True,load_only=True)
     
