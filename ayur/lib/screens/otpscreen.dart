@@ -1,3 +1,5 @@
+import 'package:ayur/screens/navbarscreen.dart';
+
 import '../provider/authprovider.dart';
 // import '../screens/navbarscreen.dart';
 import '../util/utility.dart';
@@ -33,8 +35,8 @@ class _OTPscreenState extends State<OTPscreen> {
         });
         print(response);
         if (response == "Success") {
-          // Navigator.of(context).pushNamedAndRemoveUntil(
-          //     NavbarScreen.routeName, (Route<dynamic> route) => false);
+          Navigator.of(context).pushNamedAndRemoveUntil(
+              NavbarScreen.routeName, (Route<dynamic> route) => false);
           print('login success');
         } else {
           Utility.showSnackbar(context, 'Invalid otp');

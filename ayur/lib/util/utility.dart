@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class Utility {
-  static const String URL = 'http://192.168.75.217:5000';
+  static const String URL = 'https://ayur.onrender.com/';
 
   static showSnackbar(BuildContext context, String message) {
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
