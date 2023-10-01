@@ -5,9 +5,9 @@ palm.configure(api_key=os.getenv("PALM_API_KEY"))
 
 def symptomsDetails(symtoms):
     model = 'models/text-bison-001'
-    prompt = """
+    prompt = f"""
     Suggest causes and precautions based on below symptoms if the symptoms are severe than suggest consulting doctor.
-    Symptoms: {}
+    Symptoms: {symtoms}
     output format:
     Causes:<causes>
     precautions:<precautions>   
