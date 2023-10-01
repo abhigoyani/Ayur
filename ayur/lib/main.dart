@@ -1,4 +1,6 @@
+import 'package:ayur/provider/scheduleprovider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:provider/provider.dart';
 
 import './provider/authprovider.dart';
@@ -8,16 +10,17 @@ import './screens/navbarscreen.dart';
 import './screens/schedulescreen.dart';
 import './screens/symptomsscreen.dart';
 
-void main() {
-  runApp(MyApp());
+void main() async{
+  
 }
-
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    
     return MultiProvider(
         providers: [
           ChangeNotifierProvider.value(value: AuthProvider()),
+          ChangeNotifierProvider.value(value: Scheduleprovider()),
         ],
         child: Consumer<AuthProvider>(
           builder: (context, auth, child) => MaterialApp(

@@ -67,19 +67,22 @@ class _SymptomsScreenState extends State<SymptomsScreen> {
           SizedBox(
             height: 20,
           ),
-          TextFormField(
-            decoration: const InputDecoration(
-                enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(width: 1, color: Colors.grey)),
-                focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(width: 1, color: Colors.blue))),
-            keyboardType: TextInputType.text,
-            controller: symptomsText,
-            onChanged: (value) {
-              if (value.length == 1) {
-                FocusScope.of(context).nextFocus();
-              }
-            },
+          Container(
+            padding: EdgeInsets.symmetric(vertical: 10, horizontal: 14),
+            child: TextFormField(
+              decoration: const InputDecoration(
+                  enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(width: 1, color: Colors.grey)),
+                  focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(width: 1, color: Colors.blue))),
+              keyboardType: TextInputType.text,
+              controller: symptomsText,
+              onChanged: (value) {
+                if (value.length == 1) {
+                  FocusScope.of(context).nextFocus();
+                }
+              },
+            ),
           ),
           ElevatedButton(
             onPressed: _makeApiCall,
